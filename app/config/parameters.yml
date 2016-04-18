@@ -1,5 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
+    database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
     database_name: site_plaque
@@ -10,3 +11,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
+    base_url: 'http://debug.siteplaque.local:81'

@@ -146,6 +146,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'SitePlaqueBundle\\Controller\\ClientController::addAction',  '_route' => 'register',);
         }
 
+        // liste_client
+        if ($pathinfo === '/admin/client/liste') {
+            return array (  '_controller' => 'SitePlaqueBundle\\Controller\\ClientController::indexAction',  '_route' => 'liste_client',);
+        }
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

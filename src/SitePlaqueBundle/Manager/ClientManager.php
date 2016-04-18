@@ -23,7 +23,7 @@ class ClientManager
         $this->repository = $em->getRepository('SitePlaqueBundle:Client');
     }
 
-    public function loadAllEmployees($orderedByName = true)
+    public function loadAllClients($orderedByName = true)
     {
         if ($orderedByName)
             $employees = $this->repository->findAllOrderedByName();
@@ -39,7 +39,7 @@ class ClientManager
      *
      * @param String $id
      */
-    public function loadEmployee($id)
+    public function loadClient($id)
     {
         return $this->repository->find($id);
     }
@@ -49,7 +49,7 @@ class ClientManager
      *
      * @param Client $client
      */
-    public function saveEmployee($client)
+    public function saveClient($client)
     {
         $this->entityManager->persist($client);
         $this->entityManager->flush();
@@ -60,7 +60,7 @@ class ClientManager
      *
      * @param Client $client
      */
-    public function removeEmployee(Client $client)
+    public function removeClient(Client $client)
     {
         $this->entityManager->remove($client);
         $this->entityManager->flush();

@@ -12,6 +12,7 @@ use SitePlaqueBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SitePlaqueBundle\Manager\ClientManager;
+use SitePlaqueBundle\Form;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,32 +23,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ClientController extends controller
 {
-
-   /* public function indexAction($page)
+    private function getManager()
     {
-        if ($page < 1) {
-            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-        }
+        return new ClientManager($this->get('doctrine')->getManager());
+    }
 
-        // Pour récupérer la liste de toutes les annonces : on utilise findAll()
-        $listAdverts = $this->getDoctrine()
+    /**
+     * @Route("admin/client/liste", name="liste_client")
+     */
+    public function indexAction()
+    {
+
+        $clients = $this->getDoctrine()
             ->getManager()
-            ->getRepository('OCPlatformBundle:Advert')
-            ->findAll()
+            ->getRepository('SitePlaqueBundle:Client')
+            ->getClients()
         ;
 
-        $listAdverts = $this->getDoctrine()
-             ->getManager()
-             ->getRepository('SitePlaqueBundle:Client')
-             ->getClients()
-
-        ;
 
         // L'appel de la vue ne change pas
         return $this->render('SitePlaqueBundle:Client:index.html.twig', array(
-            'listAdverts' => $listAdverts
+            'arrayClients' => $clients
         ));
-    }*/
+    }
 
     /*public function viewAction($id)
     {

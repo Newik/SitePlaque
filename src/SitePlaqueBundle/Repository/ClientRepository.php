@@ -25,7 +25,9 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function getClient($id){
+
+
+    public function getClientById($id){
 
         $qb = $this->_em->createQueryBuilder();
 
