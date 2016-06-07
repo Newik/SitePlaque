@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    </br>
+    <h1>Bienvenue sur ErgoMark</h1>
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+              Vous êtes connecté en tant que {{ app.user.username }}
+              </br>
+              </br>
+                   <a href="{{ path('plaque_platform') }}">Personnalisez vos plaques</a>
+              </br>
+              </br>
+                  <a href="{{ path('devis_platform') }}">Visualisez vos devis</a>
+               </br>
+               </br>
+                <a href="{{ path('fos_user_resetting_request') }}">Réintialiser le mot de passe</a>
+                </br>
+                </br>
+                <a href="{{ path('fos_user_change_password') }}">Changer le mot de passe</a>
+                </br>
+                </br>
+               <a href="{{ path('fos_user_profile_edit') }}">Editez votre profil</a>
+               </br>
+               </br>
+               <a href="{{ path('user_warning') }}">Supprimez votre profil</a>
+
+               </br>
+               </br>
+                  <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+
+
+
+              {% else %}
+                  <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+
+              </br>
+
+                  <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+
+    {% endif %}
+
+
+{% endblock %}
+

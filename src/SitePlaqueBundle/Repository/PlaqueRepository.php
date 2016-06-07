@@ -30,4 +30,18 @@ class PlaqueRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function getByUtilisateur($utilisateurId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        return $qb->select('p')
+            ->from('SitePlaqueBundle:Plaque', 'p')
+            ->where('p.utilisateur=:utilisateur')
+            ->setParameter('utilisateur', $utilisateurId)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
 }

@@ -10,12 +10,15 @@
 namespace SitePlaqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
+use UserBundle\Entity\Utilisateur;
+use SitePlaqueBundle\Entity\Devis;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Plaque
  *
- * @ORM\Table(name="plaque", indexes={@ORM\Index(name="index_devis_id", columns={"devis_id"})}, indexes={@ORM\Index(name="index_client_id", columns={"client_id"})})
+ * @ORM\Table(name="plaque", indexes={@ORM\Index(name="index_devis_id", columns={"devis_id"})}, indexes={@ORM\Index(name="index_utilisateur_id", columns={"utilisateur_id"})})
  * @ORM\Entity(repositoryClass="SitePlaqueBundle\Repository\PlaqueRepository")
  *
  */
@@ -37,71 +40,86 @@ class Plaque
     private $nom;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="taille", type="float", nullable=false)
-     */
-    private $taille;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="image_visuel", type="string", nullable=false)
+     * @ORM\Column(name="texte", type="string")
      */
-    private $imageVisuel;
+    private $texte;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="taille_marquage", type="float", nullable=false)
+     * @ORM\Column(name="longueur", type="float", nullable=false)
      */
-    private $tailleMarquage;
+    private $longueur;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="largeur", type="float", nullable=false)
+     */
+    private $largeur;
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longueur_marquage", type="float", nullable=false)
+     */
+    private $longueurMarquage;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="largeur_marquage", type="float", nullable=false)
+     */
+    private $largeurMarquage;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="nombre_trous", type="integer", nullable=false)
+     * @ORM\Column(name="nombre_trous", type="integer", nullable=true)
      */
     private $nombreTrous;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="nombre_couleurs", type="integer", nullable=false)
-     */
-    private $nombreCouleurs;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="date_creation", type="string", nullable=false)
+     * @ORM\Column(name="couleur_fond", type="string", nullable=false)
+     */
+    private $couleurFond;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date_creation", type="datetime", nullable=true)
      */
     private $dateCreation;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image_produit", type="string", nullable=false)
+     * @ORM\Column(name="image_produit", type="string", nullable=true)
      */
     private $imageProduit;
 
     /**
-     * @var Client $client
+     * @var Utilisateur $utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="id", cascade={"persist", "remove", "merge"})
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Utilisateur", inversedBy="plaques", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id",nullable=true)
      *
      */
-    public $client;
+    private $utilisateur;
 
     /**
      * @var Devis $devis
      *
-     * @ORM\ManyToOne(targetEntity="Devis", inversedBy="id", cascade={"persist", "remove", "merge"})
-     * @ORM\JoinColumn(name="devis_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Devis", inversedBy="plaques", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="devis_id", referencedColumnName="id",nullable=true)
      *
      */
-    public $devis;
+    protected $devis;
 
     /**
      * Constructor.
@@ -147,76 +165,125 @@ class Plaque
     }
 
     /**
-     * Get taille.
-     *
-     * @return float
-     */
-    public function getTaille()
-    {
-        return $this->taille;
-    }
-
-    /**
-     * Set taille.
-     *
-     * @param float $taille
-     *
-     * @return Plaque
-     */
-    public function setTaille($taille)
-    {
-        $this->taille = $taille;
-
-        return $this;
-    }
-
-    /**
-     * Get imageVisuel.
+     * Get texte.
      *
      * @return string
      */
-    public function getImageVisuel()
+    public function getTexte()
     {
-        return $this->imageVisuel;
+        return $this->texte;
     }
 
     /**
-     * Set imageVisuel.
+     * Set texte.
      *
-     * @param string $imageVisuel
+     * @param string $texte
      *
      * @return Plaque
      */
-    public function setImageVisuel($imageVisuel)
+    public function setTexte($texte)
     {
-        $this->imageVisuel = $imageVisuel;
+        $this->texte = $texte;
 
         return $this;
     }
 
     /**
-     * Get tailleMarquage.
+     * Get longueur.
      *
      * @return float
      */
-    public function getTailleMarquage()
+    public function getLongueur()
     {
-        return $this->tailleMarquage;
+        return $this->longueur;
     }
 
     /**
-     * Set tailleMarquage.
+     * Set longueur.
      *
-     * @param float $tailleMarquage
+     * @param float $longueur
      *
      * @return Plaque
      */
-    public function setTailleMarquage($tailleMarquage)
+    public function setLongueur($longueur)
     {
-        $this->tailleMarquage = $tailleMarquage;
+        $this->longueur = $longueur;
 
         return $this;
     }
+
+    /**
+     * Get largeur.
+     *
+     * @return float
+     */
+    public function getLargeur()
+    {
+        return $this->largeur;
+    }
+
+    /**
+     * Set largeur.
+     *
+     * @param float $largeur
+     *
+     * @return Plaque
+     */
+    public function setLargeur($largeur)
+    {
+        $this->largeur = $largeur;
+
+        return $this;
+    }
+
+    /**
+     * Get largeurMarquage.
+     *
+     * @return float
+     */
+    public function getLargeurMarquage()
+    {
+        return $this->largeurMarquage;
+    }
+
+    /**
+     * Set largeurMarquage.
+     *
+     * @param float $largeurMarquage
+     *
+     * @return Plaque
+     */
+    public function setLargeurMarquage($largeurMarquage)
+    {
+        $this->largeurMarquage = $largeurMarquage;
+
+        return $this;
+    }
+
+    /**
+     * Get longeurMarquage.
+     *
+     * @return float
+     */
+    public function getLongueurMarquage()
+    {
+        return $this->longueurMarquage;
+    }
+
+    /**
+     * Set longueurMarquage.
+     *
+     * @param float $longueurMarquage
+     *
+     * @return Plaque
+     */
+    public function setLongueurMarquage($longueurMarquage)
+    {
+        $this->longueurMarquage = $longueurMarquage;
+
+        return $this;
+    }
+
 
     /**
      * Get nombreTrous.
@@ -225,7 +292,7 @@ class Plaque
      */
     public function getNombreTrous()
     {
-        return $this->taille;
+        return $this->nombreTrous;
     }
 
     /**
@@ -243,25 +310,25 @@ class Plaque
     }
 
     /**
-     * Get nombreCouleurs.
+     * Get couleurFond.
      *
-     * @return integer
+     * @return string
      */
-    public function getNombreCouleurs()
+    public function getCouleurFond()
     {
-        return $this->taille;
+        return $this->couleurFond;
     }
 
     /**
-     * Set nombreCouleurs.
+     * Set couleurFond.
      *
-     * @param integer $nombreCouleurs
+     * @param string $couleurFond
      *
      * @return Plaque
      */
-    public function setNombreCouleurs($nombreCouleurs)
+    public function setCouleurFond($couleurFond)
     {
-        $this->nombreCouleurs = $nombreCouleurs;
+        $this->couleurFond = $couleurFond;
 
         return $this;
     }
@@ -269,7 +336,7 @@ class Plaque
     /**
      * Get dateCreation.
      *
-     * @return string
+     * @return datetime
      */
     public function getDateCreation()
     {
@@ -279,7 +346,7 @@ class Plaque
     /**
      * Set dateCreation.
      *
-     * @param string $dateCreation
+     * @param datetime $dateCreation
      *
      * @return Plaque
      */
@@ -315,13 +382,27 @@ class Plaque
     }
 
     /**
-     * Get client
+     * Get utilisateur
      *
-     * @return \SitePlaqueBundle\Entity\Client
+     * @return \UserBundle\Entity\Utilisateur
      */
-    public function getClient()
+    public function getUtilisateur()
     {
-        return $this->client;
+        return $this->utilisateur;
+    }
+
+    /**
+     * Set utilisateur.
+     *
+     * @param \UserBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Utilisateur
+     */
+    public function setUtilisateur($utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
     }
 
     /**
@@ -332,6 +413,35 @@ class Plaque
     public function getDevis()
     {
         return $this->devis;
+    }
+
+    /**
+     * Set devis
+     *
+     * @param \SitePlaqueBundle\Entity\Devis $devis
+     *
+     * @return Devis
+     */
+    public function setDevis(\SitePlaqueBundle\Entity\Devis $devis)
+    {
+        $this->devis = $devis;
+        return $this;
+    }
+
+    /**
+     * @ORM\PostUpdate()
+     * @return int
+     */
+    public function calculNbTrou()
+    {
+        $nbTrous = 4 ;
+        $nbLargeur = (($this->getlargeur() *2)-1)*2;
+        $nbLongueur = (($this->getLongueur()*2 ) -1)*2 ;
+
+        $this->nombreTrous = $nbTrous + $nbLargeur + $nbLongueur;
+
+
+        return $this->nombreTrous;
     }
 
 

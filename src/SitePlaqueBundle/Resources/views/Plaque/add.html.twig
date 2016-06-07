@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Choisissez les paramètres de votre plaque</h1>
+
+
+    <h2>Création de votre plaque</h2>
+
+    <!--formulaire de la plaque -->
+
+    <form action="{{ path('plaque_creation') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_errors(form) }}
+        {{ form_row(form) }}
+
+        <input type="submit" class="btn btn-success" />
+    </form>
+
+
+{% endblock %}

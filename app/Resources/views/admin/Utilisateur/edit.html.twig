@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if client.id %}
+        {{ parent() }} - Modification du client {{ client.id }}
+    {% else %}
+        {{ parent() }} - Ajout d'un client
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <form action="{% if client.id %}{{ path('modification_client', { 'id':client.id }) }}
+    {% else %}{{ path('inscription_client') }}{% endif %}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+
+        {{ form_row(client.nomClient) }}
+        {{ form_row(client.prenomClient) }}
+        {{ form_row(client.raisonSociale) }}
+        {{ form_row(client.siret) }}
+        {{ form_row(client.email) }}
+        {{ form_row(client.tel) }}
+        {{ form_row(client.login) }}
+        {{ form_row(client.mdp) }}
+        {{ form_rest(form) }}
+
+        <input type="submit" id="submit" value="{% if client.id %}{{ 'Valider'}}{% else %}{{ 'Ajouter'}}{% endif %}" name="submit" />
+    </form>
+{% endblock %}

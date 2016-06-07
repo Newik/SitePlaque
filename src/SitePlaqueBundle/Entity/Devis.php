@@ -9,6 +9,9 @@
 namespace SitePlaqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SitePlaqueBundle\Entity\Plaque;
+use UserBundle\Entity\Utilisateur;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -41,9 +44,36 @@ class Devis
     /**
      * @var \Doctrine\Common\Collections\Collection $plaques
      *
-     * @ORM\OneToMany(targetEntity="Plaque", mappedBy="devis", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Plaque", mappedBy="devis", cascade={"persist", "merge"})
+     *
      */
     private $plaques;
+
+    /**
+     * @var Utilisateur $utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Utilisateur", inversedBy="devis", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
+     *
+     */
+    private $utilisateur;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PrixUnitaire", cascade={"persist"})
+     * @ORM\JoinTable(name="devis_prix_unitaires",
+     *      joinColumns={@ORM\JoinColumn(name="devis_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="prix_unitaire_id", referencedColumnName="id")}
+     *      )
+     */
+     private $prixUnitaires;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="total", type="float", nullable=false)
+     */
+    private $total;
 
     /**
      * Constructor.
@@ -51,6 +81,8 @@ class Devis
     public function __construct()
     {
         //echo "hello";exit;
+        $this->plaques =  new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prixUnitaires = new \Doctrine\Common\Collections\ArrayCollection();
 
     }
 
@@ -89,6 +121,30 @@ class Devis
     }
 
     /**
+     * Get total.
+     *
+     * @return float
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Set total.
+     *
+     * @param float $total
+     *
+     * @return Devis
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
      * Get plaques
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -98,6 +154,88 @@ class Devis
         return $this->plaques;
     }
 
+    /**
+     * @param Plaque $plaque
+     * set plaque
+     */
+    public function setPlaque($plaque)
+    {
+        $this->plaques->add($plaque);
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \UserBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+    /**
+     * Set Utilisateur
+     * @param Utilisateur $utilisateur
+     */
+    public function setUtilisateur($utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+    }
+
+    /**
+     * get PrixUnitaires
+     */
+    public function getPrixUnitaires()
+    {
+        return $this->prixUnitaires;
+    }
+
+    /**
+     * set PrixUnitaire
+     * @param PrixUnitaire $prixUnit
+     */
+
+    public function setPrixUnitaires($prixUnit)
+    {
+        $this->prixUnitaires->add($prixUnit);
+    }
 
 
+    public function calculTotal()
+    {
+
+        while(!isset($pUTaille) &&!isset($pUTailleMarq) && !isset($pUnbTrou))
+        {
+            foreach ($this->prixUnitaires as $prixUnitaire) {
+                if ($prixUnitaire->getLibelle() == "Taille_Prix_Unitaire")
+                {
+                    $pUTaille = $prixUnitaire->getPrix();
+                }elseif($prixUnitaire->getLibelle() == "Taille_Marquage_Prix_Unitaire")
+                {
+                    $pUTailleMarq = $prixUnitaire->getPrix();
+                }elseif($prixUnitaire->getLibelle() == "Trou_Prix_Unitaire")
+                {
+                    $pUnbTrou = $prixUnitaire->getPrix();
+                }
+            }
+        }
+        $prixTotal = 0;
+
+        foreach($this->plaques as $plaque)
+        {
+
+            $taillePlaque = $plaque->getlargeur() * $plaque->getlongueur();
+            $tailleMarq = $plaque->getlargeurMarquage() * $plaque->getlongueurMarquage();
+
+
+            $prixTotal += $plaque->getnombreTrous() * $pUnbTrou;
+
+            $prixTotal += ($taillePlaque*100) * $pUTaille;
+            $prixTotal += ($tailleMarq *100)* $pUTailleMarq;
+
+        }
+
+        return $prixTotal;
+
+    }
 }

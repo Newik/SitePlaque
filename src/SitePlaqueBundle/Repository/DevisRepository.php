@@ -28,4 +28,18 @@ class DevisRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function getByUtilisateur($utilisateurId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        return $qb->select('d')
+            ->from('SitePlaqueBundle:Devis', 'd')
+            ->where('d.utilisateur=:utilisateur')
+            ->setParameter('utilisateur', $utilisateurId)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
 }

@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+
+    <h2>Liste des Devis</h2>
+
+    {% for undevis in devis %}
+        </br>
+        <p>{{ undevis.nom }}</p>
+        <p>{{ undevis.utilisateur}}</p>
+        </br>
+    {% else %}
+        <p>Aucun Devis n'a été trouvé.</p>
+    {% endfor %}
+
+    <div>
+
+        <a href="{{ path('accueil_platform') }}">accueil</a>
+
+    </div>
+
+{% endblock %}

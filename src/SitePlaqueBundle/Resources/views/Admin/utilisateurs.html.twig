@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+
+    <h2>Liste des Utilisateurs</h2>
+
+    {% for utilisateur in utilisateurs %}
+        </br>
+        <p>{{ utilisateur.nom }}</p>
+        <p>{{ utilisateur.prenom }}</p>
+        </br>
+    {% else %}
+        <p>Aucun Utilisateur n'a été trouvé.</p>
+    {% endfor %}
+
+    <div>
+
+        <a href="{{ path('accueil_platform') }}">accueil</a>
+
+    </div>
+
+{% endblock %}

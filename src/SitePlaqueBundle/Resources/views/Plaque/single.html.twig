@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {% for laplaque in plaque %}
+
+            <h2>Plaque :  {{ laplaque.nom }}</h2>
+
+            <div>
+                    Identifiant : {{ laplaque.id }}
+                    </br>
+                    Longeur : {{ laplaque.largeur }} cm(s)
+                    </br>
+                    Largueur : {{ laplaque.longueur }} cm(s))
+                    </br>
+                    Nombre de trous : {{ laplaque.nombreTrous }}
+                    </br>
+                    Longueur texte : {{ laplaque.longueurMarquage }} cm(s))
+                    </br>
+                    Largueur texte : {{ laplaque.largeurMarquage }} cm(s))
+                    </br>
+                    Date Création : {{ laplaque.dateCreation |date('Y-m-d') }}
+                    </br>
+
+            </div>
+
+            <a href="{{ path('devis_ajout',{'id':laplaque.id}) }}">Ajoutez cette plaque a un devis</a>
+            </br>
+            <a href="{{ path('plaque_supprime',{'id':laplaque.id}) }}">Supprimer cette plaque</a>
+            </br>
+            <a href="{{ path('plaque_platform') }}">Retour à la liste de plaques</a>
+            </br>
+            <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+
+    {% endfor%}
+
+{% endblock%}

@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    <div>
+        <h1>!!! ATTENTION !!!!</h1><h2> Vous êtes sur le point de supprimer votre profil !!!</h2>
+        </b>
+        </b>
+        <h2> Toutes vos données seront perdues !!!</h2>
+        </br>
+        </br>
+        <a href="{{ path('user_delete') }}">SUPPRIMER DEFINITIVEMENT LE PROFIL</a>
+        </br>
+        </br>
+        </br>
+        <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+    </div>
+
+
+{% endblock %}

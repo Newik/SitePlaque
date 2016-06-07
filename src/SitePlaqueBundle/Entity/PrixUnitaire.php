@@ -44,6 +44,7 @@ class PrixUnitaire
      */
     private $prix;
 
+
     /**
      * Constructor.
      */
@@ -51,5 +52,63 @@ class PrixUnitaire
     {
         //echo "hello";exit;
 
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get libelle.
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set libelle.
+     *
+     * @param string $libelle
+     *
+     * @return PrixUnitaire
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get prix.
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set prix.
+     *
+     * @param float $prix
+     *
+     * @return PrixUnitaire
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
     }
 }

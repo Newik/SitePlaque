@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+{% block content %}
+
+    <div>Modifiez votre plaque</div>
+<form action="{{ path('plaque_edit', {'id':plaque.id}) }}" method="POST">
+
+    {{ form_rest(form) }}
+
+    <input type="submit">
+    <form>
+
+{% endblock %}

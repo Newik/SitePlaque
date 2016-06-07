@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block content %}
+
+<h1>Devis</h1>
+
+<form action="{{ path('devis_ajout',{'id':plaque.id}) }}" method="POST">
+{{ form_rest(form) }}
+<input type="submit" class="btn btn-success">
+ </form>
+<div>
+
+    <a href="{{ path('accueil_platform') }}">accueil</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {% for ledevis in devis %}
+
+        <h2>Devis :  {{ ledevis.nom }}</h2>
+
+        <div>
+            Identifiant : {{ ledevis.id }}
+            </br>
+            Montant : {{ ledevis.total }} Euros
+            </br>
+
+        </div>
+
+        <a href="{{ path('devis_platform') }}">Retour à la liste des devis</a>
+        </br>
+        <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+
+    {% endfor%}
+
+{% endblock %}

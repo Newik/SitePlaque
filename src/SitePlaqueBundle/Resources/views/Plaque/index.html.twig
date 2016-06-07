@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<h1>Vos Plaques</h1>
+
+
+    <h2>Liste des plaques</h2>
+        {% for plaque in plaques %}
+            </br>
+            <p> Nom : {{ plaque.nom }}</p>
+            <p> Créée par : {{ plaque.utilisateur }}</p>
+            <a href="{{ path('plaque_single',{'id' : plaque.id}) }}">Voir les détails de la plaque</a>
+            </br>
+            <a href="{{ path('plaque_edit',{'id' : plaque.id}) }}">Modifier la plaque</a>
+            </br>
+            <a href="{{ path('plaque_supprime',{'id': plaque.id}) }}">Supprimer la plaque</a>
+            </br>
+
+        {% else %}
+    <p>Aucune plaque n'a été trouvée pour votre session.</p>
+{% endfor %}
+
+
+<div>
+    </br>
+    <a href="{{ path('plaque_creation') }}">Ajouter une plaque</a>
+    </br>
+    </br>
+    <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+
+</div>
+
+
+{% endblock %}
+
+
+

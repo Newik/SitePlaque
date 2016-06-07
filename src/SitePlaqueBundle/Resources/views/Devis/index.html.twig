@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<h1>Devis</h1>
+
+
+<h2>Liste des devis</h2>
+{% for undevis in devis %}
+    </br>
+    <p>{{ undevis.nom }}</p>
+    <a href="{{ path('devis_view',{'id' : undevis.id}) }}">Voir les détails du devis</a>
+    </br>
+    <a href="{{ path('devis_supprime',{'id': undevis.id}) }}">Supprimer le devis</a>
+    </br>
+{% else %}
+    <p>Aucun devis n'a été trouvé.</p>
+{% endfor %}
+
+<div>
+
+    <a href="{{ path('accueil_platform') }}">accueil</a>
+
+</div>
+
+{% endblock %}

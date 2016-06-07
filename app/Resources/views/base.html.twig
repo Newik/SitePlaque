@@ -2,12 +2,58 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}ERGOMARK{% endblock %}</title>
+        {% block stylesheets %} <link rel="stylesheet" href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}">{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
     </head>
     <body>
+           <div class="row">
+                <div class="col-md-12"><img src={{ asset('image/haut2.png')}} alt="Photo de montagne" /></div>
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+
+                <ul class="nav nav-tabs nav-justified">
+                    <li role="presentation"><a href="{{ path('accueil_platform') }}">Accueil</a></li>
+                    <li role="presentation"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li role="presentation"><a href="{{ path('admin_listedevis') }}">Liste de Devis</a></li>
+                    <li role="presentation"><a href="{{ path('admin_listeUser') }}">Liste des Utilisateurs </a></li>
+                </ul>
+
+                {% else %}
+            <ul class="nav nav-tabs nav-justified">
+                    <li role="presentation"><a href="{{ path('accueil_platform') }}">Accueil</a></li>
+                    <li role="presentation"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li role="presentation"><a href="{{ path('plaque_creation') }}">Création plaque</a></li>
+                    <li role="presentation"><a href="{{ path('devis_platform') }}">Devis</a></li>
+            </ul>
+            {% endif %}
+            <div class="row">
+                <table style="width:100%">
+                    <tr>
+                        <td><img src={{ asset('image/cg.png')}} alt="cotegauche" /></td>
+
+                        <td valign="top"></br>{% block content %}{% endblock %}</td>
+
+                        <td style= "float : right"><img src={{ asset('image/cd.png')}} alt="cotedroit" /></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10"><img src={{ asset('image/foot.png')}} alt="Photo de montagne"/></div>
+            </div>
+
+
+
+
+
+        <!-- Bootstrap -->
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+
+
+
     </body>
 </html>
