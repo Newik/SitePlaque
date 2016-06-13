@@ -49,23 +49,31 @@ class __TwigTemplate_d562504d781d7312bd214ad99f7b1885ab2ec832c58937065e76455969e
             echo twig_escape_filter($this->env, $this->getAttribute($context["undevis"], "utilisateur", array()), "html", null, true);
             echo "</p>
         </br>
+
+        </br>
+        <a href=\"";
+            // line 15
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("devis_supprime", array("id" => $this->getAttribute($context["undevis"], "id", array()))), "html", null, true);
+            echo "\">Supprimer le devis</a>
+        </br>
+
     ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 14
+            // line 19
             echo "        <p>Aucun Devis n'a été trouvé.</p>
     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['undevis'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 16
+        // line 21
         echo "
     <div>
 
         <a href=\"";
-        // line 19
+        // line 24
         echo $this->env->getExtension('routing')->getPath("accueil_platform");
         echo "\">accueil</a>
 
@@ -86,7 +94,7 @@ class __TwigTemplate_d562504d781d7312bd214ad99f7b1885ab2ec832c58937065e76455969e
 
     public function getDebugInfo()
     {
-        return array (  69 => 19,  64 => 16,  57 => 14,  49 => 11,  45 => 10,  42 => 9,  37 => 8,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  77 => 24,  72 => 21,  65 => 19,  56 => 15,  49 => 11,  45 => 10,  42 => 9,  37 => 8,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
@@ -101,6 +109,11 @@ class __TwigTemplate_d562504d781d7312bd214ad99f7b1885ab2ec832c58937065e76455969e
 /*         <p>{{ undevis.nom }}</p>*/
 /*         <p>{{ undevis.utilisateur}}</p>*/
 /*         </br>*/
+/* */
+/*         </br>*/
+/*         <a href="{{ path('devis_supprime',{'id': undevis.id}) }}">Supprimer le devis</a>*/
+/*         </br>*/
+/* */
 /*     {% else %}*/
 /*         <p>Aucun Devis n'a été trouvé.</p>*/
 /*     {% endfor %}*/

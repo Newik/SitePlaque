@@ -18,6 +18,9 @@ class DevisType extends AbstractType
     {
         $builder
             ->add('nom','text', array('label'=>'Nommer le devis'))
+            ->add('plaques', 'collection', array('type'=> new PlaqueType,
+                  'prototype' => true,
+                  'allow_add' => true))
             ->getForm();
     }
 

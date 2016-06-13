@@ -20,7 +20,7 @@ class PrixUnitaireRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->_em->createQueryBuilder();
 
         return $qb->select('pun')
-            ->from('PrixUnitaire', 'pun')
+            ->from('SitePlaqueBundle:PrixUnitaire', 'pun')
             ->where('pun.id=:id')
             ->setParameter('id', $id)
             ->getQuery()

@@ -13,14 +13,19 @@
     </br>
     <a href="{{ path('devis_supprime',{'id': undevis.id}) }}">Supprimer le devis</a>
     </br>
+         {% for plaque in undevis.plaques %}
+
+             <p> lié à la plaque numéro {{ plaque.id }}</p>
+
+         {% endfor %}
 {% else %}
     <p>Aucun devis n'a été trouvé.</p>
 {% endfor %}
 
 <div>
-
+    </br>
     <a href="{{ path('accueil_platform') }}">accueil</a>
-
+    </br>
 </div>
 
 {% endblock %}

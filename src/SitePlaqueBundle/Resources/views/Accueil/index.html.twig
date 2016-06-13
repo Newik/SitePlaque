@@ -2,7 +2,14 @@
 
 {% block content %}
     </br>
+    </br>
     <h1>Bienvenue sur ErgoMark</h1>
+    </br>
+    </br>
+
+                <h2>Gestion du compte</h2>
+    </br>
+    </br>
 
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
@@ -30,14 +37,12 @@
                </br>
                   <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
 
+                          {% else %}
+                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
 
+                                 </br>
 
-              {% else %}
-                  <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-
-              </br>
-
-                  <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                                 <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
 
     {% endif %}
 

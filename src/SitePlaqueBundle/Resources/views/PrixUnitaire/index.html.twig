@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    <h2>Liste des tarifs </h2>
+
+    {% for leprix in prix %}
+        </br>
+        <p> Intitulé : {{ leprix.libelle }}</p>
+        <p> Prix : {{ leprix.prix }}</p>
+
+        </br>
+        <a href="{{ path('admin_prix_edit',{'id': leprix.id}) }}">Modifier le tarif</a>
+        </br>
+
+
+    {% else %}
+        <p>Aucun prix n'a été trouvé</p>
+    {% endfor %}
+
+
+    <div>
+        </br>
+        </br>
+        <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+
+    </div>
+
+
+{% endblock %}

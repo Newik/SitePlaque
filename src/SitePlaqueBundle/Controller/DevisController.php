@@ -18,6 +18,7 @@ use SitePlaqueBundle\Entity\Plaque;
 use SitePlaqueBundle\Entity\Devis;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use SitePlaqueBundle\Manager\PlaqueManager;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 
@@ -63,7 +64,8 @@ class DevisController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $plaque = $em->getRepository('SitePlaqueBundle:Plaque')->find($id);
-        //var_dump($devis);exit;
+        //$plaque->getId();
+        //var_dump($plaque);exit;
 
         $prixUnitaires = $em->getRepository('SitePlaqueBundle:PrixUnitaire')->findall();
        // var_dump($prixUnitaires);exit;
@@ -78,11 +80,17 @@ class DevisController extends Controller
 
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $devis->setPlaque($plaque);
+            $devis->setPlaques($plaque);
             $devis->setUtilisateur($user);
             $devis->setTotal($devis->calculTotal());
+
+            //var_dump($devis);exit;
+
             $em->persist($devis);
             $em->flush();
+
+            //$devis->getId();
+            //$plaque->setDevis($devis);
 
 
             return $this->render('SitePlaqueBundle:Devis:single.html.twig', array('devis' => $devis, 'plaque' => $plaque));
@@ -94,6 +102,59 @@ class DevisController extends Controller
 
     }
 
+    /**
+     * @Route("/devis/ajout/totalite/plaques")
+     * @param $id, Request $request
+     * @return Response
+     */
+    public function addAllAction(Request $request)
+    {
+        $devis = new Devis();
+        $form = $this->createForm(DevisType::class, $devis);
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $plaques = $em->getRepository('SitePlaqueBundle:Plaque')->getByUtilisateur($user);
+        //var_dump($plaques);exit;
+
+        $prixUnitaires = $em->getRepository('SitePlaqueBundle:PrixUnitaire')->findall();
+        // var_dump($prixUnitaires);exit;
+
+        foreach( $prixUnitaires as $prixUnitaire){
+
+            $devis->getPrixUnitaires()->add($prixUnitaire);
+
+        }
+
+        //var_dump( $prixUnitaires);exit;
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            foreach($plaques as $plaque)
+            {
+                $devis->setPlaques($plaque);
+            }
+            $devis->setUtilisateur($user);
+            $devis->setTotal($devis->calculTotal());
+
+            //var_dump($devis);exit;
+
+            $em->persist($devis);
+            $em->flush();
+
+            //$devis->getId();
+            //$plaque->setDevis($devis);
+
+
+            return $this->render('SitePlaqueBundle:Devis:multi.html.twig', array('devis' => $devis, 'plaques' => $plaques));
+
+        }
+
+        return $this->render('SitePlaqueBundle:Devis:addAll.html.twig',array('form'=>$form->createView(),'devis'=>$devis,'plaques'=>$plaques ));
+
+
+    }
 
 
     public function deletevalideAction()
@@ -149,8 +210,10 @@ class DevisController extends Controller
     public function viewAction($id)
     {
         $em = $this->container->get('doctrine')->getManager();
-        $devis = $em->getRepository('SitePlaqueBundle:Devis')->getDevis($id);
+        //$devis = $em->getRepository('SitePlaqueBundle:Devis')->getDevis($id);
+        $devis = $em->find('SitePlaqueBundle:Devis', $id);
 
+        //var_dump($devis);exit;
 
         if (!$devis) {
             throw $this->createNotFoundException('Le devis n\'existe pas.');

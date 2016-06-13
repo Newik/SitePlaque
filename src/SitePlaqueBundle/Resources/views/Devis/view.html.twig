@@ -2,22 +2,30 @@
 
 {% block content %}
 
-    {% for ledevis in devis %}
+        <h2>Devis : {{ devis.nom }}</h2>
 
-        <h2>Devis :  {{ ledevis.nom }}</h2>
+            <div>
 
-        <div>
-            Identifiant : {{ ledevis.id }}
-            </br>
-            Montant : {{ ledevis.total }} Euros
-            </br>
+                </br>
+                Montant : {{ devis.total}} Euro(s)
+                </br>
+                </br>
+                {% if devis.plaques is defined %}
 
-        </div>
+                            {% for laplaque in devis.plaques %}
 
-        <a href="{{ path('devis_platform') }}">Retour à la liste des devis</a>
-        </br>
-        <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+                                <p> Identifiant de la plaque {{ laplaque.id }} </p>
 
-    {% endfor%}
+                            {% endfor %}
+                    {% else %}
+                           <p> null </p>
+                {% endif %}
+            </div>
+
+    <a href="{{ path('devis_platform') }}">Retour à la liste des devis</a>
+    </br>
+    <a href="{{ path('accueil_platform') }}">ACCUEIL</a>
+
+
 
 {% endblock %}

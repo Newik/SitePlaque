@@ -10,6 +10,12 @@
         <p>{{ utilisateur.nom }}</p>
         <p>{{ utilisateur.prenom }}</p>
         </br>
+        <a href="{{ path('admin_oneuser',{'id' : utilisateur.id}) }}">Voir détail client</a>
+        </br>
+        </br>
+        <a href="{{ path('admin_supprim_client',{'id' : utilisateur.id}) }}">Supprimer client</a>
+        </br>
+        </br>
     {% else %}
         <p>Aucun Utilisateur n'a été trouvé.</p>
     {% endfor %}

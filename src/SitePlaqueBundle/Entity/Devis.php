@@ -155,10 +155,13 @@ class Devis
     }
 
     /**
-     * @param Plaque $plaque
-     * set plaque
+     *set plaque
+     *
+     * @param \SitePlaqueBundle\Entity\Plaque $plaque
+     *
+     * @return Plaque
      */
-    public function setPlaque($plaque)
+    public function setPlaques(\SitePlaqueBundle\Entity\Plaque $plaque)
     {
         $this->plaques->add($plaque);
     }
@@ -237,5 +240,10 @@ class Devis
 
         return $prixTotal;
 
+    }
+
+    public function plaquesArray()
+    {
+        $this->plaques->toArray();
     }
 }

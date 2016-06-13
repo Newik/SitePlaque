@@ -246,12 +246,12 @@ class Devis extends \SitePlaqueBundle\Entity\Devis implements \Doctrine\ORM\Prox
     /**
      * {@inheritDoc}
      */
-    public function setPlaque($plaque)
+    public function setPlaques(\SitePlaqueBundle\Entity\Plaque $plaque)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPlaque', array($plaque));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPlaques', array($plaque));
 
-        return parent::setPlaque($plaque);
+        return parent::setPlaques($plaque);
     }
 
     /**
@@ -307,6 +307,17 @@ class Devis extends \SitePlaqueBundle\Entity\Devis implements \Doctrine\ORM\Prox
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'calculTotal', array());
 
         return parent::calculTotal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function plaquesArray()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'plaquesArray', array());
+
+        return parent::plaquesArray();
     }
 
 }

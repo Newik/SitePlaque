@@ -31,7 +31,7 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->_em->createQueryBuilder();
 
         return $qb->select('u')
-            ->from('Utilisateur', 'u')
+            ->from('UserBundle:Utilisateur', 'u')
             ->where('u.id=:id')
             ->setParameter('id', $id)
             ->getQuery()

@@ -50,12 +50,12 @@ class __TwigTemplate_4491709a00a2d6fe21fd5da7e3ac4159a471d60c140bee69774c0344f68
                     Longeur : ";
             // line 12
             echo twig_escape_filter($this->env, $this->getAttribute($context["laplaque"], "largeur", array()), "html", null, true);
-            echo " cm(s)
+            echo " m(s)
                     </br>
                     Largueur : ";
             // line 14
             echo twig_escape_filter($this->env, $this->getAttribute($context["laplaque"], "longueur", array()), "html", null, true);
-            echo " cm(s))
+            echo " m(s))
                     </br>
                     Nombre de trous : ";
             // line 16
@@ -65,12 +65,12 @@ class __TwigTemplate_4491709a00a2d6fe21fd5da7e3ac4159a471d60c140bee69774c0344f68
                     Longueur texte : ";
             // line 18
             echo twig_escape_filter($this->env, $this->getAttribute($context["laplaque"], "longueurMarquage", array()), "html", null, true);
-            echo " cm(s))
+            echo " m(s))
                     </br>
                     Largueur texte : ";
             // line 20
             echo twig_escape_filter($this->env, $this->getAttribute($context["laplaque"], "largeurMarquage", array()), "html", null, true);
-            echo " cm(s))
+            echo " m(s))
                     </br>
                     Date Création : ";
             // line 22
@@ -136,15 +136,15 @@ class __TwigTemplate_4491709a00a2d6fe21fd5da7e3ac4159a471d60c140bee69774c0344f68
 /*             <div>*/
 /*                     Identifiant : {{ laplaque.id }}*/
 /*                     </br>*/
-/*                     Longeur : {{ laplaque.largeur }} cm(s)*/
+/*                     Longeur : {{ laplaque.largeur }} m(s)*/
 /*                     </br>*/
-/*                     Largueur : {{ laplaque.longueur }} cm(s))*/
+/*                     Largueur : {{ laplaque.longueur }} m(s))*/
 /*                     </br>*/
 /*                     Nombre de trous : {{ laplaque.nombreTrous }}*/
 /*                     </br>*/
-/*                     Longueur texte : {{ laplaque.longueurMarquage }} cm(s))*/
+/*                     Longueur texte : {{ laplaque.longueurMarquage }} m(s))*/
 /*                     </br>*/
-/*                     Largueur texte : {{ laplaque.largeurMarquage }} cm(s))*/
+/*                     Largueur texte : {{ laplaque.largeurMarquage }} m(s))*/
 /*                     </br>*/
 /*                     Date Création : {{ laplaque.dateCreation |date('Y-m-d') }}*/
 /*                     </br>*/

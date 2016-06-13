@@ -29,78 +29,83 @@ class __TwigTemplate_91fda8aa8e419474c2ce016f428d0045e11e2526327204fb5b7c3ac4cf1
     {
         // line 4
         echo "    </br>
+    </br>
     <h1>Bienvenue sur ErgoMark</h1>
+    </br>
+    </br>
+
+                <h2>Gestion du compte</h2>
+    </br>
+    </br>
 
     ";
-        // line 7
+        // line 14
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 8
+            // line 15
             echo "
               Vous êtes connecté en tant que ";
-            // line 9
+            // line 16
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "user", array()), "username", array()), "html", null, true);
             echo "
               </br>
               </br>
                    <a href=\"";
-            // line 12
+            // line 19
             echo $this->env->getExtension('routing')->getPath("plaque_platform");
             echo "\">Personnalisez vos plaques</a>
               </br>
               </br>
                   <a href=\"";
-            // line 15
+            // line 22
             echo $this->env->getExtension('routing')->getPath("devis_platform");
             echo "\">Visualisez vos devis</a>
                </br>
                </br>
                 <a href=\"";
-            // line 18
+            // line 25
             echo $this->env->getExtension('routing')->getPath("fos_user_resetting_request");
             echo "\">Réintialiser le mot de passe</a>
                 </br>
                 </br>
                 <a href=\"";
-            // line 21
+            // line 28
             echo $this->env->getExtension('routing')->getPath("fos_user_change_password");
             echo "\">Changer le mot de passe</a>
                 </br>
                 </br>
                <a href=\"";
-            // line 24
+            // line 31
             echo $this->env->getExtension('routing')->getPath("fos_user_profile_edit");
             echo "\">Editez votre profil</a>
                </br>
                </br>
                <a href=\"";
-            // line 27
+            // line 34
             echo $this->env->getExtension('routing')->getPath("user_warning");
             echo "\">Supprimez votre profil</a>
 
                </br>
                </br>
                   <a href=\"";
-            // line 31
+            // line 38
             echo $this->env->getExtension('routing')->getPath("fos_user_security_logout");
             echo "\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.logout", array(), "FOSUserBundle"), "html", null, true);
             echo "</a>
 
-
-
-              ";
+                          ";
         } else {
-            // line 36
-            echo "                  <a href=\"";
+            // line 41
+            echo "                                <a href=\"";
             echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
             echo "\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.login", array(), "FOSUserBundle"), "html", null, true);
             echo "</a>
 
-              </br>
+                                 </br>
 
-                  <a href=\"";
-            // line 40
+                                 <a href=\"";
+            // line 45
             echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
             echo "\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.register", array(), "FOSUserBundle"), "html", null, true);
@@ -108,7 +113,7 @@ class __TwigTemplate_91fda8aa8e419474c2ce016f428d0045e11e2526327204fb5b7c3ac4cf1
 
     ";
         }
-        // line 43
+        // line 48
         echo "
 
 ";
@@ -126,14 +131,21 @@ class __TwigTemplate_91fda8aa8e419474c2ce016f428d0045e11e2526327204fb5b7c3ac4cf1
 
     public function getDebugInfo()
     {
-        return array (  112 => 43,  104 => 40,  94 => 36,  84 => 31,  77 => 27,  71 => 24,  65 => 21,  59 => 18,  53 => 15,  47 => 12,  41 => 9,  38 => 8,  36 => 7,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  117 => 48,  109 => 45,  99 => 41,  91 => 38,  84 => 34,  78 => 31,  72 => 28,  66 => 25,  60 => 22,  54 => 19,  48 => 16,  45 => 15,  43 => 14,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
 /* */
 /* {% block content %}*/
 /*     </br>*/
+/*     </br>*/
 /*     <h1>Bienvenue sur ErgoMark</h1>*/
+/*     </br>*/
+/*     </br>*/
+/* */
+/*                 <h2>Gestion du compte</h2>*/
+/*     </br>*/
+/*     </br>*/
 /* */
 /*     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}*/
 /* */
@@ -161,14 +173,12 @@ class __TwigTemplate_91fda8aa8e419474c2ce016f428d0045e11e2526327204fb5b7c3ac4cf1
 /*                </br>*/
 /*                   <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>*/
 /* */
+/*                           {% else %}*/
+/*                                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>*/
 /* */
+/*                                  </br>*/
 /* */
-/*               {% else %}*/
-/*                   <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>*/
-/* */
-/*               </br>*/
-/* */
-/*                   <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>*/
+/*                                  <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>*/
 /* */
 /*     {% endif %}*/
 /* */

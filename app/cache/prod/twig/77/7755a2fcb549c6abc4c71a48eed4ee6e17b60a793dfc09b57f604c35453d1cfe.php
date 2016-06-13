@@ -89,6 +89,12 @@ class __TwigTemplate_10cdc21b74e625f4ba8b2f02842d13815c281ec56a37dc03fcb98f229af
     </br>
     <a href=\"";
         // line 30
+        echo $this->env->getExtension('routing')->getPath("devis_all_plaques");
+        echo "\">Faire un devis pour l'ensemble de vos plaques</a>
+    </br>
+    </br>
+    <a href=\"";
+        // line 33
         echo $this->env->getExtension('routing')->getPath("accueil_platform");
         echo "\">ACCUEIL</a>
 
@@ -110,7 +116,7 @@ class __TwigTemplate_10cdc21b74e625f4ba8b2f02842d13815c281ec56a37dc03fcb98f229af
 
     public function getDebugInfo()
     {
-        return array (  92 => 30,  86 => 27,  80 => 23,  73 => 21,  64 => 17,  59 => 15,  54 => 13,  50 => 12,  46 => 11,  43 => 10,  38 => 9,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  98 => 33,  92 => 30,  86 => 27,  80 => 23,  73 => 21,  64 => 17,  59 => 15,  54 => 13,  50 => 12,  46 => 11,  43 => 10,  38 => 9,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
@@ -140,6 +146,9 @@ class __TwigTemplate_10cdc21b74e625f4ba8b2f02842d13815c281ec56a37dc03fcb98f229af
 /* <div>*/
 /*     </br>*/
 /*     <a href="{{ path('plaque_creation') }}">Ajouter une plaque</a>*/
+/*     </br>*/
+/*     </br>*/
+/*     <a href="{{ path('devis_all_plaques') }}">Faire un devis pour l'ensemble de vos plaques</a>*/
 /*     </br>*/
 /*     </br>*/
 /*     <a href="{{ path('accueil_platform') }}">ACCUEIL</a>*/

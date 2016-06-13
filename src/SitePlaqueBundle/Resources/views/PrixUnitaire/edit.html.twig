@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block content %}
+
+    <h2>Modifier le tarif </h2>
+
+<form action="{{ path('admin_prix_edit', {'id': prixunitaire.id}) }}" method="POST">
+
+    {{ form_rest(form) }} <p>Euros</p>
+
+    <input type="submit" class="btn btn-success">
+    <form>
+
+{% endblock %}

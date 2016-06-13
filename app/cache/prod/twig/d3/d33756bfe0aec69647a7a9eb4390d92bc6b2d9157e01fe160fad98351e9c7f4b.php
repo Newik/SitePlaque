@@ -64,54 +64,58 @@ class __TwigTemplate_76f8845864572cab66234cf02f600f9a930f51b67f414f1953b707fb50f
                     <li role=\"presentation\"><a href=\"";
             // line 19
             echo $this->env->getExtension('routing')->getPath("admin_listedevis");
-            echo "\">Liste de Devis</a></li>
+            echo "\">Liste des Devis</a></li>
                     <li role=\"presentation\"><a href=\"";
             // line 20
             echo $this->env->getExtension('routing')->getPath("admin_listeUser");
             echo "\">Liste des Utilisateurs </a></li>
+                    <li role=\"presentation\"><a href=\"";
+            // line 21
+            echo $this->env->getExtension('routing')->getPath("admin_prix_list");
+            echo "\">Changer les tarifs </a></li>
                 </ul>
 
                 ";
         } else {
-            // line 24
+            // line 25
             echo "            <ul class=\"nav nav-tabs nav-justified\">
                     <li role=\"presentation\"><a href=\"";
-            // line 25
+            // line 26
             echo $this->env->getExtension('routing')->getPath("accueil_platform");
             echo "\">Accueil</a></li>
                     <li role=\"presentation\"><a href=\"";
-            // line 26
+            // line 27
             echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
             echo "\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.login", array(), "FOSUserBundle"), "html", null, true);
             echo "</a></li>
                     <li role=\"presentation\"><a href=\"";
-            // line 27
+            // line 28
             echo $this->env->getExtension('routing')->getPath("plaque_creation");
             echo "\">Création plaque</a></li>
                     <li role=\"presentation\"><a href=\"";
-            // line 28
+            // line 29
             echo $this->env->getExtension('routing')->getPath("devis_platform");
             echo "\">Devis</a></li>
             </ul>
             ";
         }
-        // line 31
+        // line 32
         echo "            <div class=\"row\">
                 <table style=\"width:100%\">
                     <tr>
                         <td><img src=";
-        // line 34
+        // line 35
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("image/cg.png"), "html", null, true);
         echo " alt=\"cotegauche\" /></td>
 
                         <td valign=\"top\"></br>";
-        // line 36
+        // line 37
         $this->displayBlock('content', $context, $blocks);
         echo "</td>
 
                         <td style= \"float : right\"><img src=";
-        // line 38
+        // line 39
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("image/cd.png"), "html", null, true);
         echo " alt=\"cotedroit\" /></td>
                     </tr>
@@ -120,7 +124,7 @@ class __TwigTemplate_76f8845864572cab66234cf02f600f9a930f51b67f414f1953b707fb50f
 
             <div class=\"row\">
                 <div class=\"col-md-10\"><img src=";
-        // line 44
+        // line 45
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("image/foot.png"), "html", null, true);
         echo " alt=\"Photo de montagne\"/></div>
             </div>
@@ -132,12 +136,12 @@ class __TwigTemplate_76f8845864572cab66234cf02f600f9a930f51b67f414f1953b707fb50f
         <!-- Bootstrap -->
 
         ";
-        // line 53
-        $this->displayBlock('body', $context, $blocks);
         // line 54
+        $this->displayBlock('body', $context, $blocks);
+        // line 55
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 55
+        // line 56
         echo "
 
 
@@ -160,17 +164,17 @@ class __TwigTemplate_76f8845864572cab66234cf02f600f9a930f51b67f414f1953b707fb50f
         echo "\">";
     }
 
-    // line 36
+    // line 37
     public function block_content($context, array $blocks = array())
     {
     }
 
-    // line 53
+    // line 54
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 54
+    // line 55
     public function block_javascripts($context, array $blocks = array())
     {
     }
@@ -187,7 +191,7 @@ class __TwigTemplate_76f8845864572cab66234cf02f600f9a930f51b67f414f1953b707fb50f
 
     public function getDebugInfo()
     {
-        return array (  174 => 54,  169 => 53,  164 => 36,  156 => 6,  150 => 5,  141 => 55,  138 => 54,  136 => 53,  124 => 44,  115 => 38,  110 => 36,  105 => 34,  100 => 31,  94 => 28,  90 => 27,  84 => 26,  80 => 25,  77 => 24,  70 => 20,  66 => 19,  60 => 18,  56 => 17,  52 => 15,  50 => 14,  45 => 12,  36 => 7,  34 => 6,  30 => 5,  24 => 1,);
+        return array (  178 => 55,  173 => 54,  168 => 37,  160 => 6,  154 => 5,  145 => 56,  142 => 55,  140 => 54,  128 => 45,  119 => 39,  114 => 37,  109 => 35,  104 => 32,  98 => 29,  94 => 28,  88 => 27,  84 => 26,  81 => 25,  74 => 21,  70 => 20,  66 => 19,  60 => 18,  56 => 17,  52 => 15,  50 => 14,  45 => 12,  36 => 7,  34 => 6,  30 => 5,  24 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -208,8 +212,9 @@ class __TwigTemplate_76f8845864572cab66234cf02f600f9a930f51b67f414f1953b707fb50f
 /*                 <ul class="nav nav-tabs nav-justified">*/
 /*                     <li role="presentation"><a href="{{ path('accueil_platform') }}">Accueil</a></li>*/
 /*                     <li role="presentation"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>*/
-/*                     <li role="presentation"><a href="{{ path('admin_listedevis') }}">Liste de Devis</a></li>*/
+/*                     <li role="presentation"><a href="{{ path('admin_listedevis') }}">Liste des Devis</a></li>*/
 /*                     <li role="presentation"><a href="{{ path('admin_listeUser') }}">Liste des Utilisateurs </a></li>*/
+/*                     <li role="presentation"><a href="{{ path('admin_prix_list') }}">Changer les tarifs </a></li>*/
 /*                 </ul>*/
 /* */
 /*                 {% else %}*/

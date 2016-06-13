@@ -38,16 +38,18 @@ class __TwigTemplate_dd31fe8ec840fadaba18c619a888cfef85b6d9c335e977205178543daea
         // line 9
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("devis_ajout", array("id" => $this->getAttribute((isset($context["plaque"]) ? $context["plaque"] : null), "id", array()))), "html", null, true);
         echo "\" method=\"POST\">
-";
-        // line 10
+
+ ";
+        // line 11
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : null), 'rest');
         echo "
+
 <input type=\"submit\" class=\"btn btn-success\">
  </form>
 <div>
 
     <a href=\"";
-        // line 15
+        // line 17
         echo $this->env->getExtension('routing')->getPath("accueil_platform");
         echo "\">accueil</a>
 
@@ -68,7 +70,7 @@ class __TwigTemplate_dd31fe8ec840fadaba18c619a888cfef85b6d9c335e977205178543daea
 
     public function getDebugInfo()
     {
-        return array (  51 => 15,  43 => 10,  39 => 9,  34 => 6,  31 => 5,  27 => 1,  25 => 3,  11 => 1,);
+        return array (  53 => 17,  44 => 11,  39 => 9,  34 => 6,  31 => 5,  27 => 1,  25 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
@@ -80,7 +82,9 @@ class __TwigTemplate_dd31fe8ec840fadaba18c619a888cfef85b6d9c335e977205178543daea
 /* <h1>Devis</h1>*/
 /* */
 /* <form action="{{ path('devis_ajout',{'id':plaque.id}) }}" method="POST">*/
-/* {{ form_rest(form) }}*/
+/* */
+/*  {{ form_rest(form) }}*/
+/* */
 /* <input type="submit" class="btn btn-success">*/
 /*  </form>*/
 /* <div>*/

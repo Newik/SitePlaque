@@ -3,13 +3,19 @@
 {% block content %}
 
 <h1>Devis</h1>
+<div>
     </br>
     <p>Devis numéro {{ devis.id }}</p>
     <p> Nom du devis : {{ devis.nom }}</p>
+    <p>Lié à la plaque numéro {{ plaque.id}} nommée {{ plaque.nom }}</p>
+    </br>
     <a href="{{ path('devis_view',{'id' :devis.id}) }}">Voir les détails du devis</a>
     </br>
 
-<div>
+</div>
+
+
+    <div>
 
     <a href="{{ path('accueil_platform') }}">accueil</a>
 

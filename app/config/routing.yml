@@ -70,6 +70,10 @@ devis_supprime_valide:
     path:     /devis/suppressionvalide
     defaults: { _controller: SitePlaqueBundle:Devis:deletevalide }
 
+devis_all_plaques:
+    path: /devis/ajout/totalite/plaques
+    defaults: { _controller: SitePlaqueBundle:Devis:addAll }
+    
 admin_listeUser:
     path: /admin/listeClient
     defaults: { _controller: SitePlaqueBundle:Admin:listUser }
@@ -77,6 +81,36 @@ admin_listeUser:
 admin_listedevis:
     path: /admin/listeDevis
     defaults: { _controller: SitePlaqueBundle:Admin:listDevis }
+
+admin_oneuser:
+    path: /admin/ListeClient/Client/{id}
+    defaults: { _controller: UserBundle:Utilisateur:client }
+    requirements:
+        id: \d*
+
+admin_warning:
+    path: /admin/utilisateur/suppression
+    defaults: { _controller: UserBundle:Utilisateur:warningAdmin }
+
+admin_supprim_client:
+    path: /admin/suppression/Devis/{id}
+    defaults: { _controller: UserBundle:Utilisateur:deleteClient }
+    requirements:
+        id: \d*
+
+admin_prix_list:
+    path: /admin/prixunitaires
+    defaults: { _controller: SitePlaqueBundle:PrixUnitaire:list }
+
+admin_prix_edit:
+    path: /admin/prixunitaires/edit/{id}
+    defaults: { _controller: SitePlaqueBundle:PrixUnitaire:edit }
+    requirements:
+        id: \d*
+
+prix_success:
+    path: /admin/prixunitaires/modificationValide
+    defaults: { _controller: SitePlaqueBundle:PrixUnitaire:succes }
 
 user_warning:
     path: /utilisateur/suppression

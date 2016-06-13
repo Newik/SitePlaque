@@ -58,6 +58,20 @@ class UtilisateurController extends controller
 
     /**
      *
+     *@Route("admin/utilisateur/suppression")
+     *
+     */
+    public function warningAdminAction()
+    {
+
+        $content = $this->get('templating')->render('UserBundle:Admin:warningAdmin.html.twig');
+        return new Response($content);
+
+
+    }
+
+    /**
+     *
      *@Route("/utilisateur/suppression/valider")
      *
      */
@@ -80,8 +94,72 @@ class UtilisateurController extends controller
 
     }
 
+    /**
+     * Voir détails d'un utilisateur.
 
-//getByUtilisateur($utilisateurId)
+     * @route("/admin/ListeClient/Client/{id}")
+     *
+     * @param int     $id
+     *
+     * @return array
+     *
+     * @throws NotFoundHttpException quand le client n'existe pas.
+     */
+    public function clientAction($id)
+    {
+        $em = $this->container->get('doctrine')->getManager();
+        $utilisateur = $em->getRepository('UserBundle:Utilisateur')->getUtilisateur($id);
+        $admin=$this->getUser()->getId();
+
+        if (!$utilisateur) {
+            throw $this->createNotFoundException('L\'utilisateur n\'existe pas.');
+        }
+        else if ( $id == $admin)
+        {
+
+            return $this->redirect($this->generateUrl('admin_warning'));
+        }
+
+        $content = $this->get('templating')->render('UserBundle:Utilisateur:client.html.twig', array('utilisateur' => $utilisateur));
+        return new Response($content);
+
+    }
+
+    /**
+     * Supprimer un utilisateur
+
+     * @route("/admin/suppression/Client/{id}")
+     *
+     * @param int     $id
+     *
+     * @return array
+     *
+     * @throws NotFoundHttpException quand le client n'existe pas.
+     */
+    public function deleteClientAction($id)
+    {
+        $em = $this->container->get('doctrine')->getManager();
+        $utilisateur = $em->find('UserBundle:Utilisateur', $id);
+        //$utilisateur = $em->getRepository('UserBundle:Utilisateur')->getUtilisateur($id);
+        $admin=$this->getUser()->getId();
+        //var_dump($utilisateur);exit;
+
+
+        if (!$utilisateur) {
+            throw new NotFoundHttpException("Utilisateur non trouvé");
+        }
+        else if ($id == $admin)
+        {
+            return $this->redirect($this->generateUrl('admin_warning'));
+        }
+
+        $em->remove($utilisateur);
+        $em->flush();
+
+
+        return $this->redirect($this->generateUrl('accueil_platform'));
+
+    }
 
     public function infoClientAction()
     {
@@ -93,35 +171,5 @@ class UtilisateurController extends controller
         // L'appel de la vue ne change pas
         return $this->render('UserBundle:Gestion:index.html.twig', array('arrayUtilisateurs' => $utilisateur));
     }
-
-
-
-    /*public function deleteAction($id, Request $request)
-    {
-        // On récupère l'EntityManager
-        $em = $this->getDoctrine()->getManager();
-
-        // On récupère l'entité correspondant à l'id $id
-        $advert = $em->getRepository('OCPlatformBundle:Advert')->find($id);
-
-        // Si l'annonce n'existe pas, on affiche une erreur 404
-        if ($advert == null) {
-            throw $this->createNotFoundException("L'annonce d'id ".$id." n'existe pas.");
-        }
-
-        if ($request->isMethod('POST')) {
-            // Si la requête est en POST, on deletea l'article
-
-            $request->getSession()->getFlashBag()->add('info', 'Annonce bien supprimée.');
-
-            // Puis on redirige vers l'accueil
-            return $this->redirect($this->generateUrl('home'));
-        }
-
-        // Si la requête est en GET, on affiche une page de confirmation avant de delete
-        return $this->render('SitePlaqueBundle:Client:delete.html.twig', array(
-            'advert' => $advert
-        ));
-    }*/
 
 }

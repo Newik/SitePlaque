@@ -41,28 +41,43 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::indexAction',  '_route' => 'liste_client',);
         }
 
-        if (0 === strpos($pathinfo, '/utilisateur/suppression')) {
-            // user_utilisateur_warning
-            if ($pathinfo === '/utilisateur/suppression') {
-                return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::warningAction',  '_route' => 'user_utilisateur_warning',);
-            }
-
-            // user_utilisateur_delete
-            if ($pathinfo === '/utilisateur/suppression/valider') {
-                return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::deleteAction',  '_route' => 'user_utilisateur_delete',);
-            }
-
+        // user_utilisateur_warning
+        if ($pathinfo === '/utilisateur/suppression') {
+            return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::warningAction',  '_route' => 'user_utilisateur_warning',);
         }
 
-        if (0 === strpos($pathinfo, '/admin/liste')) {
-            // siteplaque_admin_listclient
-            if ($pathinfo === '/admin/listeClient') {
-                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listClientAction',  '_route' => 'siteplaque_admin_listclient',);
+        // user_utilisateur_warningadmin
+        if ($pathinfo === '/admin/utilisateur/suppression') {
+            return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::warningAdminAction',  '_route' => 'user_utilisateur_warningadmin',);
+        }
+
+        // user_utilisateur_delete
+        if ($pathinfo === '/utilisateur/suppression/valider') {
+            return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::deleteAction',  '_route' => 'user_utilisateur_delete',);
+        }
+
+        if (0 === strpos($pathinfo, '/admin')) {
+            // user_utilisateur_client
+            if (0 === strpos($pathinfo, '/admin/ListeClient/Client') && preg_match('#^/admin/ListeClient/Client/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_utilisateur_client')), array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::clientAction',));
             }
 
-            // siteplaque_admin_listdevis
-            if ($pathinfo === '/admin/listeDevis') {
-                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listDevisAction',  '_route' => 'siteplaque_admin_listdevis',);
+            // user_utilisateur_deleteclient
+            if (0 === strpos($pathinfo, '/admin/suppression/Client') && preg_match('#^/admin/suppression/Client/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_utilisateur_deleteclient')), array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::deleteClientAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/admin/liste')) {
+                // siteplaque_admin_listclient
+                if ($pathinfo === '/admin/listeClient') {
+                    return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listClientAction',  '_route' => 'siteplaque_admin_listclient',);
+                }
+
+                // siteplaque_admin_listdevis
+                if ($pathinfo === '/admin/listeDevis') {
+                    return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listDevisAction',  '_route' => 'siteplaque_admin_listdevis',);
+                }
+
             }
 
         }
@@ -77,6 +92,11 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         }
 
         if (0 === strpos($pathinfo, '/devis')) {
+            // siteplaque_devis_addall
+            if ($pathinfo === '/devis/ajout/totalite/plaques') {
+                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\DevisController::addAllAction',  '_route' => 'siteplaque_devis_addall',);
+            }
+
             // siteplaque_devis_delete
             if (0 === strpos($pathinfo, '/devis/suppression') && preg_match('#^/devis/suppression/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'siteplaque_devis_delete')), array (  '_controller' => 'SitePlaqueBundle\\Controller\\DevisController::deleteAction',));
@@ -112,9 +132,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
         }
 
-        // accueil_platform
-        if ($pathinfo === '/accueil') {
-            return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AccueilController::indexAction',  '_route' => 'accueil_platform',);
+        if (0 === strpos($pathinfo, '/a')) {
+            // siteplaque_prixunitaire_edit
+            if (0 === strpos($pathinfo, '/admin/prixUnitaire/edit') && preg_match('#^/admin/prixUnitaire/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'siteplaque_prixunitaire_edit')), array (  '_controller' => 'SitePlaqueBundle\\Controller\\PrixUnitaireController::editAction',));
+            }
+
+            // accueil_platform
+            if ($pathinfo === '/accueil') {
+                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AccueilController::indexAction',  '_route' => 'accueil_platform',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/plaques')) {
@@ -190,17 +218,58 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
             }
 
-        }
-
-        if (0 === strpos($pathinfo, '/admin/liste')) {
-            // admin_listeUser
-            if ($pathinfo === '/admin/listeClient') {
-                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listUserAction',  '_route' => 'admin_listeUser',);
+            // devis_all_plaques
+            if ($pathinfo === '/devis/ajout/totalite/plaques') {
+                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\DevisController::addAllAction',  '_route' => 'devis_all_plaques',);
             }
 
-            // admin_listedevis
-            if ($pathinfo === '/admin/listeDevis') {
-                return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listDevisAction',  '_route' => 'admin_listedevis',);
+        }
+
+        if (0 === strpos($pathinfo, '/admin')) {
+            if (0 === strpos($pathinfo, '/admin/liste')) {
+                // admin_listeUser
+                if ($pathinfo === '/admin/listeClient') {
+                    return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listUserAction',  '_route' => 'admin_listeUser',);
+                }
+
+                // admin_listedevis
+                if ($pathinfo === '/admin/listeDevis') {
+                    return array (  '_controller' => 'SitePlaqueBundle\\Controller\\AdminController::listDevisAction',  '_route' => 'admin_listedevis',);
+                }
+
+            }
+
+            // admin_oneuser
+            if (0 === strpos($pathinfo, '/admin/ListeClient/Client') && preg_match('#^/admin/ListeClient/Client/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_oneuser')), array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::clientAction',));
+            }
+
+            // admin_warning
+            if ($pathinfo === '/admin/utilisateur/suppression') {
+                return array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::warningAdminAction',  '_route' => 'admin_warning',);
+            }
+
+            // admin_supprim_client
+            if (0 === strpos($pathinfo, '/admin/suppression/Devis') && preg_match('#^/admin/suppression/Devis/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_supprim_client')), array (  '_controller' => 'UserBundle\\Controller\\UtilisateurController::deleteClientAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/admin/prixunitaires')) {
+                // admin_prix_list
+                if ($pathinfo === '/admin/prixunitaires') {
+                    return array (  '_controller' => 'SitePlaqueBundle\\Controller\\PrixUnitaireController::listAction',  '_route' => 'admin_prix_list',);
+                }
+
+                // admin_prix_edit
+                if (0 === strpos($pathinfo, '/admin/prixunitaires/edit') && preg_match('#^/admin/prixunitaires/edit/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_prix_edit')), array (  '_controller' => 'SitePlaqueBundle\\Controller\\PrixUnitaireController::editAction',));
+                }
+
+                // prix_success
+                if ($pathinfo === '/admin/prixunitaires/modificationValide') {
+                    return array (  '_controller' => 'SitePlaqueBundle\\Controller\\PrixUnitaireController::succesAction',  '_route' => 'prix_success',);
+                }
+
             }
 
         }

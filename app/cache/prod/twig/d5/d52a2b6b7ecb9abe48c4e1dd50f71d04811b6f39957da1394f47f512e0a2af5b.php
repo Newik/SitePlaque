@@ -29,49 +29,64 @@ class __TwigTemplate_07c70893b2ffe424f30a9a72851ec2ab19f92824184054dcc732f335cd1
     {
         // line 4
         echo "
-    ";
+        <h2>Devis : ";
         // line 5
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["devis"]) ? $context["devis"] : null));
-        foreach ($context['_seq'] as $context["_key"] => $context["ledevis"]) {
-            // line 6
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["devis"]) ? $context["devis"] : null), "nom", array()), "html", null, true);
+        echo "</h2>
+
+            <div>
+
+                </br>
+                Montant : ";
+        // line 10
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["devis"]) ? $context["devis"] : null), "total", array()), "html", null, true);
+        echo " Euro(s)
+                </br>
+                </br>
+                ";
+        // line 13
+        if ($this->getAttribute((isset($context["devis"]) ? $context["devis"] : null), "plaques", array(), "any", true, true)) {
+            // line 14
             echo "
-        <h2>Devis :  ";
-            // line 7
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ledevis"], "nom", array()), "html", null, true);
-            echo "</h2>
+                            ";
+            // line 15
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["devis"]) ? $context["devis"] : null), "plaques", array()));
+            foreach ($context['_seq'] as $context["_key"] => $context["laplaque"]) {
+                // line 16
+                echo "
+                                <p> Identifiant de la plaque ";
+                // line 17
+                echo twig_escape_filter($this->env, $this->getAttribute($context["laplaque"], "id", array()), "html", null, true);
+                echo " </p>
 
-        <div>
-            Identifiant : ";
-            // line 10
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ledevis"], "id", array()), "html", null, true);
-            echo "
-            </br>
-            Montant : ";
-            // line 12
-            echo twig_escape_filter($this->env, $this->getAttribute($context["ledevis"], "total", array()), "html", null, true);
-            echo " Euros
-            </br>
-
-        </div>
-
-        <a href=\"";
-            // line 17
-            echo $this->env->getExtension('routing')->getPath("devis_platform");
-            echo "\">Retour à la liste des devis</a>
-        </br>
-        <a href=\"";
-            // line 19
-            echo $this->env->getExtension('routing')->getPath("accueil_platform");
-            echo "\">ACCUEIL</a>
-
-    ";
+                            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['laplaque'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 20
+            echo "                    ";
+        } else {
+            // line 21
+            echo "                           <p> null </p>
+                ";
         }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ledevis'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 22
-        echo "
+        // line 23
+        echo "            </div>
+
+    <a href=\"";
+        // line 25
+        echo $this->env->getExtension('routing')->getPath("devis_platform");
+        echo "\">Retour à la liste des devis</a>
+    </br>
+    <a href=\"";
+        // line 27
+        echo $this->env->getExtension('routing')->getPath("accueil_platform");
+        echo "\">ACCUEIL</a>
+
+
+
 ";
     }
 
@@ -87,29 +102,37 @@ class __TwigTemplate_07c70893b2ffe424f30a9a72851ec2ab19f92824184054dcc732f335cd1
 
     public function getDebugInfo()
     {
-        return array (  74 => 22,  65 => 19,  60 => 17,  52 => 12,  47 => 10,  41 => 7,  38 => 6,  34 => 5,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  85 => 27,  80 => 25,  76 => 23,  72 => 21,  69 => 20,  60 => 17,  57 => 16,  53 => 15,  50 => 14,  48 => 13,  42 => 10,  34 => 5,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
 /* */
 /* {% block content %}*/
 /* */
-/*     {% for ledevis in devis %}*/
+/*         <h2>Devis : {{ devis.nom }}</h2>*/
 /* */
-/*         <h2>Devis :  {{ ledevis.nom }}</h2>*/
+/*             <div>*/
 /* */
-/*         <div>*/
-/*             Identifiant : {{ ledevis.id }}*/
-/*             </br>*/
-/*             Montant : {{ ledevis.total }} Euros*/
-/*             </br>*/
+/*                 </br>*/
+/*                 Montant : {{ devis.total}} Euro(s)*/
+/*                 </br>*/
+/*                 </br>*/
+/*                 {% if devis.plaques is defined %}*/
 /* */
-/*         </div>*/
+/*                             {% for laplaque in devis.plaques %}*/
 /* */
-/*         <a href="{{ path('devis_platform') }}">Retour à la liste des devis</a>*/
-/*         </br>*/
-/*         <a href="{{ path('accueil_platform') }}">ACCUEIL</a>*/
+/*                                 <p> Identifiant de la plaque {{ laplaque.id }} </p>*/
 /* */
-/*     {% endfor%}*/
+/*                             {% endfor %}*/
+/*                     {% else %}*/
+/*                            <p> null </p>*/
+/*                 {% endif %}*/
+/*             </div>*/
+/* */
+/*     <a href="{{ path('devis_platform') }}">Retour à la liste des devis</a>*/
+/*     </br>*/
+/*     <a href="{{ path('accueil_platform') }}">ACCUEIL</a>*/
+/* */
+/* */
 /* */
 /* {% endblock %}*/

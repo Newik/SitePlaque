@@ -16,8 +16,9 @@
                 <ul class="nav nav-tabs nav-justified">
                     <li role="presentation"><a href="{{ path('accueil_platform') }}">Accueil</a></li>
                     <li role="presentation"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-                    <li role="presentation"><a href="{{ path('admin_listedevis') }}">Liste de Devis</a></li>
+                    <li role="presentation"><a href="{{ path('admin_listedevis') }}">Liste des Devis</a></li>
                     <li role="presentation"><a href="{{ path('admin_listeUser') }}">Liste des Utilisateurs </a></li>
+                    <li role="presentation"><a href="{{ path('admin_prix_list') }}">Changer les tarifs </a></li>
                 </ul>
 
                 {% else %}

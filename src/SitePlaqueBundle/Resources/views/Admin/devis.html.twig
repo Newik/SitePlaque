@@ -10,6 +10,11 @@
         <p>{{ undevis.nom }}</p>
         <p>{{ undevis.utilisateur}}</p>
         </br>
+
+        </br>
+        <a href="{{ path('devis_supprime',{'id': undevis.id}) }}">Supprimer le devis</a>
+        </br>
+
     {% else %}
         <p>Aucun Devis n'a été trouvé.</p>
     {% endfor %}
